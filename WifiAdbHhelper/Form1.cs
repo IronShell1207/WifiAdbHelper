@@ -23,6 +23,7 @@ namespace WifiAdbHelper
         public EzShell.CheckUpdates checkUpd;
         public EzShell.SwMsgDwnldUpt swMsgDwnld;
         public settingForm settingForm;
+        bool isLast = true;
         public string link = "";
         Form1 _form1;
         public NotifyIcon notificationM = new NotifyIcon()
@@ -183,6 +184,7 @@ namespace WifiAdbHelper
                     else buttontest.Visible = true;
                     notificationM.ShowBalloonTip(3000, "Update available " + Ver, "Click on this notification to see more", ToolTipIcon.Info);
                     notificationM.BalloonTipClicked += NotificationM_BalloonTipClicked;
+                    isLast = false;
                 }
             });
             r.IsBackground = true;
@@ -531,7 +533,7 @@ namespace WifiAdbHelper
         }
         private void SettingButton_Click(object sender, EventArgs e)
         {
-            settingForm settingFormm = new settingForm();
+            settingForm settingFormm = new settingForm(isLast);
             if (settingFormm.ShowDialog() == DialogResult.OK)
             {
                 SetTimerInterval();

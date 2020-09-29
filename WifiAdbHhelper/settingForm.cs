@@ -14,10 +14,12 @@ namespace WifiAdbHelper
 {
     public partial class settingForm : MetroFramework.Forms.MetroForm
     {
+        bool isLast1 = false;
 
-        public settingForm()
+        public settingForm(bool isLast)
         {
-            InitializeComponent();          
+            InitializeComponent();
+            isLast1 = isLast;
         }
         Form1 form1 = new Form1();
        
@@ -25,7 +27,7 @@ namespace WifiAdbHelper
         {
             this.StyleManager = metroStyleManager1;
             //mainVars.pathForADB();
-            labelVersion.Text = "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            labelVersion.Text = isLast1 ? "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " (latest)"  : "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             textBoxADBPath.Text = SettableVars.AdbPath;
             metroStyleManager1.Theme = SettableVars.themeStyle;
             metroStyleManager1.Style = SettableVars.colorStyle;
@@ -140,5 +142,9 @@ namespace WifiAdbHelper
             form1.INI.Write(consts.allSettings[0], consts.allSettings[4], SettableVars.DevicesUpdatingTiming.ToString());
         }
 
+        private void labelVersion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -196,6 +196,7 @@
             this.labelVersion.Size = new System.Drawing.Size(83, 19);
             this.labelVersion.TabIndex = 15;
             this.labelVersion.Text = "metroLabel4";
+            this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
             // 
             // metroLabel4
             // 
