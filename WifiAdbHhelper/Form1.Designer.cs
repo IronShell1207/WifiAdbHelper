@@ -350,13 +350,14 @@
             // 
             // buttontest
             // 
-            this.buttontest.FontWeight = MetroFramework.MetroButtonWeight.Light;
-            this.buttontest.Location = new System.Drawing.Point(206, 306);
+            this.buttontest.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.buttontest.Location = new System.Drawing.Point(206, 301);
             this.buttontest.Name = "buttontest";
             this.buttontest.Size = new System.Drawing.Size(75, 19);
             this.buttontest.TabIndex = 1;
-            this.buttontest.Text = "Check updates";
+            this.buttontest.Text = "Update!";
             this.buttontest.UseSelectable = true;
+            this.buttontest.Visible = false;
             this.buttontest.Click += new System.EventHandler(this.buttontest_Click);
             // 
             // labelADBpath

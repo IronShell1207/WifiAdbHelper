@@ -179,6 +179,8 @@ namespace WifiAdbHelper
                 string Ver = checkUpd.MsgUpdateAvailable();
                 if (Ver != null)
                 {
+                    if (InvokeRequired) buttontest.Invoke(new Action(() => buttontest.Visible = true));
+                    else buttontest.Visible = true;
                     notificationM.ShowBalloonTip(3000, "Update available " + Ver, "Click on this notification to see more", ToolTipIcon.Info);
                     notificationM.BalloonTipClicked += NotificationM_BalloonTipClicked;
                 }
