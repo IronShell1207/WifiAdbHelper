@@ -58,9 +58,33 @@ namespace WifiAdbHelper
         }
         private void metroButton3_Click(object sender, EventArgs e)
         {
+            var r = new Thread(() =>
+            {
+                vysorStart();
+            });
+            r.IsBackground = true;
+            r.Start();
+        }
+        void vysorStart()
+        {
             try
             {
-                Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Vysor\Vysor.exe");
+                if (InvokeRequired) metroProgressBar1.Invoke(new Action(() => metroProgressBar1.Visible = true));
+                var procchec1 = Process.GetProcessesByName("Vysor");
+                if (procchec1.Length !=null)
+                {
+                    Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Vysor\Vysor.exe");
+                    while (true)
+                    {
+                        var proccheck = Process.GetProcessesByName("Vysor");
+                        if (proccheck.Length >= 5)
+                        {
+                           
+                            break;
+                        }
+                    }
+                }
+                if (InvokeRequired) metroProgressBar1.Invoke(new Action(() => metroProgressBar1.Visible = false));
                 timerAutoUpdateList.Start();
             }
             catch (Exception ea)
@@ -175,6 +199,7 @@ namespace WifiAdbHelper
             ThemeFirst();
             mainVars.devicePath();
             SetTimerInterval();
+            AutoreconAtStart();
             var r = new Thread(() =>
             {
                 string Ver = checkUpd.MsgUpdateAvailable();
@@ -504,6 +529,19 @@ namespace WifiAdbHelper
         private void buttontest_Click(object sender, EventArgs e)
         {
             checkUpd.UpdaterProg(swMsgDwnld);
+        }
+        private void AutoreconAtStart()
+        {
+            if (INI.KeyExists(consts.allSettings[5], consts.allSettings[0]))
+            {
+                bool autorecoStat = bool.Parse(INI.ReadINI(consts.allSettings[0], consts.allSettings[5]));
+                if (autorecoStat)
+                {
+                    vysorStart();
+                    AdbOperationCreator(consts.comADB[2] + textboxIP.Text, consts.mesADB[2]);
+
+                }
+            }
         }
         private void timer1_Tick_1(object sender, EventArgs e)
         {

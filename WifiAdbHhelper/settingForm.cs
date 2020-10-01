@@ -39,6 +39,8 @@ namespace WifiAdbHelper
             numericUpDown1.ForeColor = consts.listViewColors2[getThemeFromIniId() - 1];
             numericUpDown1.Value = SettableVars.DevicesUpdatingTiming/1000;
             textBoxDevicePath.Text = SettableVars.DevicePathFile;
+            if (form1.INI.KeyExists(consts.allSettings[5], consts.allSettings[0]))
+                metroToggle1.Checked = bool.Parse(form1.INI.ReadINI(consts.allSettings[0], consts.allSettings[5]));
             //form1.getThemeFromINI();
         }
         int getThemeFromIniId()
@@ -145,6 +147,16 @@ namespace WifiAdbHelper
         private void labelVersion_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void metroToggle1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!form1.INI.KeyExists("IsFirstEnable", consts.allSettings[0]))
+            {
+                form1.INI.Write(consts.allSettings[0], "IsFirstEnable", "true");
+                MetroMessageBox.Show(this, "By enabling this function, each time you start this program, vysor will automatically start and connect to the last device!", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            form1.INI.Write(consts.allSettings[0], consts.allSettings[5], metroToggle1.CheckState==CheckState.Checked? "true":"false");
         }
     }
 }

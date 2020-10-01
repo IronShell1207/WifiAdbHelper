@@ -45,6 +45,8 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.textBoxDevicePath = new MetroFramework.Controls.MetroTextBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +54,7 @@
             // metroButton1
             // 
             this.metroButton1.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.metroButton1.Location = new System.Drawing.Point(342, 286);
+            this.metroButton1.Location = new System.Drawing.Point(342, 316);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(75, 23);
             this.metroButton1.TabIndex = 0;
@@ -191,7 +193,7 @@
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(12, 290);
+            this.labelVersion.Location = new System.Drawing.Point(17, 320);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(83, 19);
             this.labelVersion.TabIndex = 15;
@@ -270,11 +272,34 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
+            // metroToggle1
+            // 
+            this.metroToggle1.AutoSize = true;
+            this.metroToggle1.DisplayStatus = false;
+            this.metroToggle1.Location = new System.Drawing.Point(302, 288);
+            this.metroToggle1.Name = "metroToggle1";
+            this.metroToggle1.Size = new System.Drawing.Size(50, 17);
+            this.metroToggle1.TabIndex = 19;
+            this.metroToggle1.Text = "Off";
+            this.metroToggle1.UseSelectable = true;
+            this.metroToggle1.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(17, 286);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(195, 19);
+            this.metroLabel5.TabIndex = 20;
+            this.metroLabel5.Text = "Auto connect last device at start";
+            // 
             // settingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 316);
+            this.ClientSize = new System.Drawing.Size(440, 349);
+            this.Controls.Add(this.metroLabel5);
+            this.Controls.Add(this.metroToggle1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.textBoxDevicePath);
             this.Controls.Add(this.metroLabel4);
@@ -323,5 +348,7 @@
         private MetroFramework.Controls.MetroTextBox textBoxDevicePath;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroToggle metroToggle1;
     }
 }

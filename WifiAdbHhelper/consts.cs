@@ -42,6 +42,6 @@ namespace WifiAdbHelper
         public static string[] notificationMessagesHeader = new string[] {  };
 
         public static readonly string[] setThemeKeys = new string[] { "ThemeStyle", "ThemeColor" };
-        public static readonly string[] allSettings = new string[] { "Settings","LastIP","AutoUpdate","DevicePath","TimerInterval" };
+        public static readonly string[] allSettings = new string[] { "Settings","LastIP","AutoUpdate","DevicePath","TimerInterval","AutoConnect" };
     }
 }
