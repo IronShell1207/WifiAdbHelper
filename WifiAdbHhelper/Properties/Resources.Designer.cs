@@ -61,6 +61,16 @@ namespace WifiAdbHelper.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] AdminRightsRestarter {
+            get {
+                object obj = ResourceManager.GetObject("AdminRightsRestarter", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Arrow_left {
@@ -99,6 +109,26 @@ namespace WifiAdbHelper.Properties {
             get {
                 object obj = ResourceManager.GetObject("icons", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap movetray0 {
+            get {
+                object obj = ResourceManager.GetObject("movetray0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap movetray1 {
+            get {
+                object obj = ResourceManager.GetObject("movetray1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

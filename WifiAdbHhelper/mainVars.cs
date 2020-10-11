@@ -8,6 +8,8 @@ using inifiles;
 using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Security.Authentication;
+using System.ComponentModel;
 
 namespace WifiAdbHelper
 {
@@ -16,6 +18,7 @@ namespace WifiAdbHelper
         [DllImport("Kernel32.dll")]
         private static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] uint dwFlags, [Out] StringBuilder lpExeName, [In, Out] ref uint lpdwSize);
         public static Form1 form1 = new Form1();
+        public static String file_exe = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + "\\AdminRightsRestarter.exe";
         public static string GetMainModuleFileName(this Process process, int buffer = 1024)
         {
             var fileNameBuilder = new StringBuilder(buffer);
@@ -24,8 +27,16 @@ namespace WifiAdbHelper
             {
                 return QueryFullProcessImageName(process.Handle, 0, fileNameBuilder, ref bufferLength) ? fileNameBuilder.ToString() : null;
             }
-            catch (Exception ex )
+            catch (Win32Exception ex )
             {
+                try
+                {
+                    FileStream fs = new FileStream(file_exe, FileMode.Create);
+                    fs.Write(Properties.Resources.AdminRightsRestarter, 0, Properties.Resources.AdminRightsRestarter.Length);
+                    fs.Close();
+                    Process.Start("AdminRightsRestarter.exe", "WifiAdbHelper.exe");
+                }
+                catch (Exception exx) { }
                 form1.messageBoxCaller("Close the adb.exe!\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }

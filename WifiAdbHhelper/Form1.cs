@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -31,18 +32,15 @@ namespace WifiAdbHelper
             Icon = Properties.Resources.icons,
             BalloonTipIcon = ToolTipIcon.Info,
             Text = consts.notifyIconTextM
-        };      public IniFile INI = new IniFile(consts.setFolderPath() + consts.settingFileName);
+        }; public IniFile INI = new IniFile(consts.setFolderPath() + consts.settingFileName);
         public Form1()
         {
             InitializeComponent();
             this.StyleManager = mSM1;
             swMsgDwnld = messageBoxCaller;
             link = EzShell.CheckUpdates.LinkGenerator();
-
-
             _form1 = this;
             //mSM1.Theme = getThemeFromINI();
-
         }
         private void buttonConnect_Click(object sender, EventArgs e)
         {
@@ -69,23 +67,8 @@ namespace WifiAdbHelper
         {
             try
             {
-                if (InvokeRequired) metroProgressBar1.Invoke(new Action(() => metroProgressBar1.Visible = true));
-                var procchec1 = Process.GetProcessesByName("Vysor");
-                if (procchec1.Length !=null)
-                {
+                if (Process.GetProcessesByName("Vysor").Length < 1)
                     Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Vysor\Vysor.exe");
-                    while (true)
-                    {
-                        var proccheck = Process.GetProcessesByName("Vysor");
-                        if (proccheck.Length >= 5)
-                        {
-                           
-                            break;
-                        }
-                    }
-                }
-                if (InvokeRequired) metroProgressBar1.Invoke(new Action(() => metroProgressBar1.Visible = false));
-                timerAutoUpdateList.Start();
             }
             catch (Exception ea)
             {
@@ -94,13 +77,7 @@ namespace WifiAdbHelper
         }
         private void Form1_Deactivate(object sender, EventArgs e)
         {
-            // if (this.)
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                notificationM.ShowBalloonTip(2, "Hidded to the tray", "The Wifi ADB helper hidded to the tray", ToolTipIcon.Info);
-                this.ShowInTaskbar = false;
-                //notifyIcon1.Visible = true;
-            }
+
         }
         private void buttonStartServer_Click(object sender, EventArgs e)
         {
@@ -155,7 +132,7 @@ namespace WifiAdbHelper
         {
             Thread.Sleep(2000);
             EzShell.SwMsgDwnldUpt swMsa = messageBoxCaller;
-           // EzUpdater.CheckUpdates.updateschecker(Application.ProductVersion.ToString(), "WifiAdbHelper", metroProgressBar1, @"https://www.fordroid.3dn.ru/WifiAdbHelper.zip", swMsa);
+            // EzUpdater.CheckUpdates.updateschecker(Application.ProductVersion.ToString(), "WifiAdbHelper", metroProgressBar1, @"https://www.fordroid.3dn.ru/WifiAdbHelper.zip", swMsa);
         }
         /*public string LinkGenerator()
         {
@@ -188,8 +165,7 @@ namespace WifiAdbHelper
         }*/
         private void Form1_Load(object sender, EventArgs e)
         {
-            notificationM.DoubleClick += NotificationM_DoubleClick;
-            notificationM.Visible = true;
+
             checkUpd = new EzShell.CheckUpdates(Application.ProductName, Application.ProductVersion, link + @"/Files/WifiAdbHelper.zip", swMsgDwnld, metroProgressBar1, notificationM, labelADBstatus);
             mainVars.ipAddress();
             textboxIP.Text = SettableVars.ipAd;
@@ -197,9 +173,17 @@ namespace WifiAdbHelper
             AutoUpdateMet();
             Refresher();
             ThemeFirst();
+            NotifyIconPlace();
             mainVars.devicePath();
             SetTimerInterval();
             AutoreconAtStart();
+
+        }
+        void NotifyIconPlace() //иконка в трее запуск проверки обновлений и добавление событий
+        {
+            notificationM.ContextMenuStrip = contextMenuICon;
+            notificationM.DoubleClick += NotificationM_DoubleClick;
+            notificationM.Visible = true;
             var r = new Thread(() =>
             {
                 string Ver = checkUpd.MsgUpdateAvailable();
@@ -213,7 +197,7 @@ namespace WifiAdbHelper
                 }
             });
             r.IsBackground = true;
-            r.Start(); 
+            r.Start();
         }
         private void NotificationM_BalloonTipClicked(object sender, EventArgs e)
         {
@@ -239,8 +223,8 @@ namespace WifiAdbHelper
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
+                this.Show();
                 this.WindowState = FormWindowState.Normal;
-                this.ShowInTaskbar = true;
                 //notifyIcon1.Visible = false;
             }
         }
@@ -261,11 +245,8 @@ namespace WifiAdbHelper
         }
         private void развернутьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.ShowInTaskbar = true;
-            }
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
         }
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -274,7 +255,7 @@ namespace WifiAdbHelper
         }
         public void CmdExecutor(string commandMessage, string headMes)
         {
-            EnablerDisablerViaInstall(false);
+            ElementEnControl(false);
             ProcessStartInfo lcmdInfo1;
             lcmdInfo1 = new ProcessStartInfo(SettableVars.AdbPath, commandMessage)
             {
@@ -302,7 +283,7 @@ namespace WifiAdbHelper
                 messageMaker(headMes, resultWError + resultN);
             else
                 messageMaker(headMes, resultN + resultWError);
-            EnablerDisablerViaInstall(true);
+            ElementEnControl(true);
             cmd2.Dispose();
         }
         public void messageMaker(string Head, string nResult)
@@ -329,7 +310,7 @@ namespace WifiAdbHelper
         }
         public DialogResult messageBoxCaller(string message, string topMes, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
-            var dr = MetroMessageBox.Show(_form1, message, topMes, buttons, icon,265);
+            var dr = MetroMessageBox.Show(_form1, message, topMes, buttons, icon, 265);
             return dr;
         }
         public void AutoUpdateMet()
@@ -380,7 +361,7 @@ namespace WifiAdbHelper
             else
                 pushfilepatch("");
         }
-        public void EnablerDisablerViaInstall(bool states)//, params Control[] controls)
+        public void ElementEnControl(bool states)//, params Control[] controls)
         {
             List<Control> allEras;
             allEras = new List<Control> { buttonConnect, buttonDevices, buttonDisconnect, buttonKill, buttonPushFile, buttonStart, buttonVysor, textboxIP, buttonSetting, buttonRecon };
@@ -522,7 +503,7 @@ namespace WifiAdbHelper
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            notificationM.Visible = false;
+            notificationM.Dispose();
             timer1.Stop();
             timerAutoUpdateList.Stop(); timerStatusAndButtons.Stop();
         }
@@ -651,6 +632,43 @@ namespace WifiAdbHelper
         private void metroButton1_Click_1(object sender, EventArgs e)
         {
             checkUpd.UpdaterProg(swMsgDwnld);//Application.ProductName, Application.ProductVersion, @"https://www.fordroid.3dn.ru/WifiAdbHelper.zip", showMsg, metroProgressBar1);
+        }
+
+        private void contextMenuICon_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Properties.Resources.movetray1;
+            ToolTip toolTip = new ToolTip()
+            {
+                UseAnimation = true
+            };
+            toolTip.SetToolTip(pictureBox1, "Hide to tray");
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Properties.Resources.movetray0;
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Hide();
+            notificationM.ShowBalloonTip(2, "Minimized to the tray", "The Wifi ADB helper hidded to the tray", ToolTipIcon.Info);
+        }
+
+        private void contextMADB_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

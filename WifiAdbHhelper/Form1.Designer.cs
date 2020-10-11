@@ -66,12 +66,14 @@
             this.timerStatusAndButtons = new System.Windows.Forms.Timer(this.components);
             this.buttonRecon = new MetroFramework.Controls.MetroButton();
             this.pBoxArrow = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.mSM1)).BeginInit();
             this.contextMenuICon.SuspendLayout();
             this.contextMADB.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // mSM1
@@ -210,6 +212,7 @@
             this.contextMenuICon.Name = "contextMenuICon";
             this.contextMenuICon.Size = new System.Drawing.Size(169, 48);
             this.contextMenuICon.Text = "f";
+            this.contextMenuICon.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuICon_Opening);
             // 
             // развернутьToolStripMenuItem
             // 
@@ -318,19 +321,20 @@
             this.copyADBPathToolStripMenuItem,
             this.startCMDADBToolStripMenuItem});
             this.contextMADB.Name = "contextMenuStrip1";
-            this.contextMADB.Size = new System.Drawing.Size(156, 48);
+            this.contextMADB.Size = new System.Drawing.Size(181, 70);
+            this.contextMADB.Opening += new System.ComponentModel.CancelEventHandler(this.contextMADB_Opening);
             // 
             // copyADBPathToolStripMenuItem
             // 
             this.copyADBPathToolStripMenuItem.Name = "copyADBPathToolStripMenuItem";
-            this.copyADBPathToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.copyADBPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyADBPathToolStripMenuItem.Text = "Copy ADB Path";
             this.copyADBPathToolStripMenuItem.Click += new System.EventHandler(this.copyADBPathToolStripMenuItem_Click);
             // 
             // startCMDADBToolStripMenuItem
             // 
             this.startCMDADBToolStripMenuItem.Name = "startCMDADBToolStripMenuItem";
-            this.startCMDADBToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.startCMDADBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startCMDADBToolStripMenuItem.Text = "Start CMD ADB";
             this.startCMDADBToolStripMenuItem.Click += new System.EventHandler(this.startCMDADBToolStripMenuItem_Click);
             // 
@@ -445,7 +449,7 @@
             // 
             this.pBoxArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pBoxArrow.Image = global::WifiAdbHelper.Properties.Resources.Arrow_right;
-            this.pBoxArrow.Location = new System.Drawing.Point(246, 6);
+            this.pBoxArrow.Location = new System.Drawing.Point(0, 7);
             this.pBoxArrow.Name = "pBoxArrow";
             this.pBoxArrow.Size = new System.Drawing.Size(22, 29);
             this.pBoxArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -454,12 +458,27 @@
             this.pBoxArrow.Visible = false;
             this.pBoxArrow.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WifiAdbHelper.Properties.Resources.movetray0;
+            this.pictureBox1.Location = new System.Drawing.Point(217, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(23, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
+            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(293, 383);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pBoxArrow);
             this.Controls.Add(this.buttonRecon);
             this.Controls.Add(this.buttonSetting);
@@ -500,6 +519,7 @@
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -542,6 +562,7 @@
         private System.Windows.Forms.PictureBox pBoxArrow;
         private MetroFramework.Controls.MetroButton buttonRecon;
         public MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
