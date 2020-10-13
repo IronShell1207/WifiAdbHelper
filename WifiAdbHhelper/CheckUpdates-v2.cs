@@ -38,6 +38,7 @@ namespace EzShell
             labelProgress = labelU;
             GetRemoteVerLinq = LinkGenerator() + GetRemoteVerLinq;
             GetReleaseNotesLinq = LinkGenerator() + GetReleaseNotesLinq;
+            //
             
         }
         public static string LinkGenerator()
