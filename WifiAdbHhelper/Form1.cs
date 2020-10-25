@@ -32,7 +32,7 @@ namespace WifiAdbHelper
             Icon = Properties.Resources.icons,
             BalloonTipIcon = ToolTipIcon.Info,
             Text = consts.notifyIconTextM
-        }; public IniFile INI = new IniFile(consts.setFolderPath() + consts.settingFileName);
+        }; public IniFile INI = new IniFile(consts.setFolderPath + consts.settingFileName);
         public Form1()
         {
             InitializeComponent();
@@ -211,13 +211,6 @@ namespace WifiAdbHelper
             SettableVars.themeStyle = mSM1.Theme = (MetroThemeStyle)themeIndex;
             listView1.BackColor = consts.listViewColors[themeIndex - 1];
             listView1.ForeColor = consts.listViewColors2[themeIndex - 1];
-        }
-        public void ThemeUpdater(int id)
-        {
-            mSM1.Style = SettableVars.colorStyle;
-            mSM1.Theme = SettableVars.themeStyle;
-            listView1.BackColor = consts.listViewColors[id];
-            listView1.ForeColor = consts.listViewColors2[id];
         }
         private void NotificationM_DoubleClick(object sender, EventArgs e)
         {
@@ -552,11 +545,11 @@ namespace WifiAdbHelper
         }
         private void SettingButton_Click(object sender, EventArgs e)
         {
-            settingForm settingFormm = new settingForm(isLast);
+            settingForm settingFormm = new settingForm(isLast, ref mSM1, ref listView1);
             if (settingFormm.ShowDialog() == DialogResult.OK)
             {
                 SetTimerInterval();
-                ThemeUpdater(SettableVars.ThemeId);
+              //  ThemeUpdater(SettableVars.ThemeId);
             }
             //mainVars.settingForm.ShowDialog();
 

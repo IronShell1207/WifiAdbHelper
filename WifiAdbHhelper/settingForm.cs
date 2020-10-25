@@ -10,27 +10,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EzShell;
 using MetroFramework;
+using MetroFramework.Components;
+
 namespace WifiAdbHelper
 {
     public partial class settingForm : MetroFramework.Forms.MetroForm
     {
         bool isLast1 = false;
-
-        public settingForm(bool isLast)
+        MetroStyleManager mSM1;
+        ListView lb1;
+        public settingForm(bool isLast, ref MetroStyleManager mSM2, ref ListView lb)
         {
             InitializeComponent();
             isLast1 = isLast;
+            mSM1 = mSM2;
+            lb1 = lb;
         }
         Form1 form1 = new Form1();
        
         private void settingForm_Load(object sender, EventArgs e)
         {
-            this.StyleManager = metroStyleManager1;
+            this.StyleManager = mSM1;
+            mSM1.Owner = this;
             //mainVars.pathForADB();
             labelVersion.Text = isLast1 ? "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " (latest)"  : "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             textBoxADBPath.Text = SettableVars.AdbPath;
-            metroStyleManager1.Theme = SettableVars.themeStyle;
-            metroStyleManager1.Style = SettableVars.colorStyle;
+          //  metroStyleManager1.Theme = SettableVars.themeStyle;
+           // metroStyleManager1.Style = SettableVars.colorStyle;
             comboBoxColor.Items.AddRange(consts.allStyles);
             comboBoxTheme.Items.AddRange(consts.allThemes);
             comboBoxColor.SelectedIndex = getColorFromIniId()-1;
@@ -77,12 +83,14 @@ namespace WifiAdbHelper
         }
         private void comboBoxTheme_SelectedIndexChanged(object sender, EventArgs e)
         {
-            metroStyleManager1.Theme = (MetroThemeStyle)comboBoxTheme.SelectedIndex+1;
+            mSM1.Theme = (MetroThemeStyle)comboBoxTheme.SelectedIndex+1;
             SettableVars.themeStyle= (MetroThemeStyle)comboBoxTheme.SelectedIndex + 1;
            // form1.mSM1.Theme = (MetroThemeStyle) comboBoxTheme.SelectedIndex + 1;
             form1.INI.Write(consts.allSettings[0], consts.setThemeKeys[0],(string) comboBoxTheme.SelectedItem);
             numericUpDown1.BackColor = consts.listViewColors[getThemeFromIniId() - 1];
             numericUpDown1.ForeColor = consts.listViewColors2[getThemeFromIniId() - 1];
+            lb1.BackColor = consts.listViewColors[getThemeFromIniId() - 1];
+            lb1.ForeColor = consts.listViewColors2[getThemeFromIniId() - 1];
             //form1.INI.Write(")
             // if (comboBoxTheme.SelectedItem != null)
             //setVarsGlobal.themeStyle = ;
@@ -90,7 +98,7 @@ namespace WifiAdbHelper
 
         private void comboBoxColor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            metroStyleManager1.Style = (MetroColorStyle) comboBoxColor.SelectedIndex+1;
+            mSM1.Style = (MetroColorStyle) comboBoxColor.SelectedIndex+1;
             //form1.mSM1.Style = (MetroColorStyle)comboBoxColor.SelectedIndex + 1;
             SettableVars.colorStyle = (MetroColorStyle)comboBoxColor.SelectedIndex + 1;
             form1.INI.Write(consts.allSettings[0], consts.setThemeKeys[1], (string)comboBoxColor.SelectedItem);

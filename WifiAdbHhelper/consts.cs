@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MetroFramework;
 
 namespace WifiAdbHelper
@@ -28,12 +29,16 @@ namespace WifiAdbHelper
         public static readonly Color[] listViewColors = new Color[] { Color.Gainsboro, Color.Black };
         public static readonly Color[] listViewColors2 = new Color[] { Color.Black, Color.Gainsboro };
         public static readonly string[] separator = { "\n", "\r" };
-        public static string setFolderPath() {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\WifiadbHelper\";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            return path;
+        public static string setFolderPath
+        {
+            get
+            {
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\WifiadbHelper\";
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                return path;
             }
+        }
 
         public static readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         public static readonly string defaultPathVysor = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Vysor\crx\gidgenkbbabolejbgbpnhbimgjbffefm\app-2.1.7.crx-unpacked\native\win32";

@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.comboBoxTheme = new MetroFramework.Controls.MetroComboBox();
             this.comboBoxColor = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.textBoxADBPath = new MetroFramework.Controls.MetroTextBox();
@@ -47,7 +45,6 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,10 +98,6 @@
             this.metroLabel2.Size = new System.Drawing.Size(71, 19);
             this.metroLabel2.TabIndex = 4;
             this.metroLabel2.Text = "Color style";
-            // 
-            // metroStyleManager1
-            // 
-            this.metroStyleManager1.Owner = this;
             // 
             // metroButton2
             // 
@@ -323,7 +316,6 @@
             this.Text = "Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.settingForm_FormClosed);
             this.Load += new System.EventHandler(this.settingForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -337,7 +329,6 @@
         private MetroFramework.Controls.MetroComboBox comboBoxColor;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroTextBox textBoxADBPath;
         private MetroFramework.Controls.MetroLabel metroLabel3;

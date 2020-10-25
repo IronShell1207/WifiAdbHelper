@@ -321,20 +321,20 @@
             this.copyADBPathToolStripMenuItem,
             this.startCMDADBToolStripMenuItem});
             this.contextMADB.Name = "contextMenuStrip1";
-            this.contextMADB.Size = new System.Drawing.Size(181, 70);
+            this.contextMADB.Size = new System.Drawing.Size(156, 48);
             this.contextMADB.Opening += new System.ComponentModel.CancelEventHandler(this.contextMADB_Opening);
             // 
             // copyADBPathToolStripMenuItem
             // 
             this.copyADBPathToolStripMenuItem.Name = "copyADBPathToolStripMenuItem";
-            this.copyADBPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyADBPathToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.copyADBPathToolStripMenuItem.Text = "Copy ADB Path";
             this.copyADBPathToolStripMenuItem.Click += new System.EventHandler(this.copyADBPathToolStripMenuItem_Click);
             // 
             // startCMDADBToolStripMenuItem
             // 
             this.startCMDADBToolStripMenuItem.Name = "startCMDADBToolStripMenuItem";
-            this.startCMDADBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startCMDADBToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.startCMDADBToolStripMenuItem.Text = "Start CMD ADB";
             this.startCMDADBToolStripMenuItem.Click += new System.EventHandler(this.startCMDADBToolStripMenuItem_Click);
             // 
