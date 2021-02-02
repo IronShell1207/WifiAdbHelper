@@ -505,7 +505,7 @@
             this.Name = "Form1";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Default;
-            this.Text = "Wifi ADB Helper";
+            this.Text = "WifiADBHelper";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
